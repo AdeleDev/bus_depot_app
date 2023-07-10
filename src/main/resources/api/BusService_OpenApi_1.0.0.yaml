@@ -1,0 +1,298 @@
+openapi: 3.0.3
+info:
+  title: Bus depot management service
+  description: This is a sample API of Buses management service.
+  version: 1.0.0
+servers:
+  - url: 'https://bus.depot.service.com/v1'
+  - url: 'http://bus.depot.service.com/v1'
+tags:
+  - name: Buses
+    description: Information about buses in bus depot
+paths:
+  /buses:
+    put:
+      tags:
+        - buses
+      summary: Update an existing bus profile
+      operationId: updateBus
+      requestBody:
+        description: Update bus profile
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Bus'
+        required: true
+      responses:
+        '200':
+          description: Updated
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    format: int64
+                    description: ID of the updated bus
+        '404':
+          description: Bus not found
+          content: { }
+        '405':
+          description: Validation exception
+          content: { }
+      x-codegen-request-body-name: body
+    post:
+      tags:
+        - buses
+      summary: Add a new bus profile
+      operationId: addBus
+      requestBody:
+        description: Add a new bus profile
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Bus'
+        required: true
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    format: int64
+                    description: ID of the created bus
+        '405':
+          description: Invalid input
+          content: { }
+      x-codegen-request-body-name: body
+    get:
+      tags:
+        - buses
+      summary: Find all existing buses
+      operationId: getAllBuses
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Bus'
+        '204':
+          description: No any bus found
+          content: { }
+  /buses/findByPeopleAmount:
+    get:
+      tags:
+        - buses
+      summary: Find bus by amount of people allowed in the bus
+      operationId: findByPeopleAmount
+      parameters:
+        - name: amount
+          in: query
+          description: Amount value that needs to be considered for filter
+          required: true
+          style: form
+          explode: true
+          schema:
+            type: integer
+            format: int64
+            default: 0
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Bus'
+        '400':
+          description: Bad request
+          content: { }
+        '404':
+          description: No any bus found
+          content: { }
+  /buses/findByTrip:
+    get:
+      tags:
+        - buses
+      summary: Find buses by trip they follow
+      operationId: findByTrip
+      parameters:
+        - name: trip
+          in: query
+          description: Name of place in the trip bus passes
+          style: form
+          explode: true
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 20
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Bus'
+        '400':
+          description: Bad request
+          content: { }
+        '404':
+          description: No any bus found
+          content: { }
+  '/buses/{busId}/getDrivers':
+    get:
+      tags:
+        - buses
+      summary: Returns drivers that can  drive this bus
+      operationId: getDrivers
+      parameters:
+        - name: busId
+          in: path
+          description: ID of bus to return
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Driver'
+        '400':
+          description: Bad Request
+          content: { }
+        '404':
+          description: No any bus found
+          content: { }
+  '/buses/{busId}':
+    get:
+      tags:
+        - buses
+      summary: Find bus by ID
+      description: Returns a single bus
+      operationId: getBusById
+      parameters:
+        - name: busId
+          in: path
+          description: ID of bus to return
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Bus'
+        '400':
+          description: Invalid ID supplied
+          content: { }
+        '404':
+          description: Bus not found
+          content: { }
+    delete:
+      tags:
+        - buses
+      summary: Deletes a bus profile
+      operationId: deleteBus
+      parameters:
+        - name: busId
+          in: path
+          description: Bus ID to delete
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '204':
+          description: Deleted
+          content: { }
+        '404':
+          description: Bus not found
+          content: { }
+components:
+  schemas:
+    Driver:
+      type: object
+      properties:
+        id:
+          description: IDs of drivers that can drive this bus
+          type: integer
+          format: int64
+          example: 12
+        href:
+          description: Link to Driver's API
+          type: string
+          example: "/drivers/12"
+      xml:
+        name: Driver
+    Bus:
+      required:
+        - number
+        - color
+        - peopleAmount
+        - maintenanceDate
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        driversInfo:
+          type: array
+          items:
+            $ref: '#/components/schemas/Driver'
+          uniqueItems: true
+        number:
+          description: Registration number of bus in police.
+          type: string
+          example: HHEU1784
+          minLength: 4
+          maxLength: 10
+        color:
+          description: Color of the bus
+          type: string
+          example: yellow
+          enum:
+            - yellow
+            - green
+            - blue
+            - grey
+            - black
+            - other
+        peopleAmount:
+          description: Amount of passengers allowed in the bus
+          type: integer
+          example: 16
+          minimum: 4
+          maximum: 72
+          format: int64
+        maintenanceDate:
+          description: Date of last maintenance. Validation rule - our system doesn't support years before 2010
+          type: string
+          example: 10.02.2022
+          format: date
+        trip:
+          description: Trip that bus follows
+          type: string
+          example: Berlin-Stuttgart
+          minLength: 1
+          maxLength: 200
+      xml:
+        name: Bus

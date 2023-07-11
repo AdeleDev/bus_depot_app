@@ -22,7 +22,7 @@ public interface BusMngmtService {
 
     BusDto getBusById(Long busId) throws BusNotExistException, InvalidIdException;
 
-    List<BusDto> findByPeopleAmount(int amount);
+    List<BusDto> findByPeopleAmount(Long amount);
 
     List<BusDto> findByTrip(String location);
 

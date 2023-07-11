@@ -30,7 +30,7 @@ public class BusEntity extends BaseEntity {
     @DateTimeFormat(pattern = "dd.MM.yyyy")
     @PastOrPresent
     @Size(min = 10, max = 10)
-    @Temporal(TemporalType.DATE)
+    //@Temporal(TemporalType.DATE)
     private LocalDate maintenanceDate;
 
     @NotNull

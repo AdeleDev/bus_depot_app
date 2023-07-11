@@ -16,7 +16,6 @@ import javax.validation.ValidationException;
 import java.time.OffsetDateTime;
 import java.time.ZoneId;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 import static company.busmanagement.mappers.BusFieldsMapper.BUS_FIELDS_MAPPER;
@@ -104,7 +103,7 @@ public class BusMngmtServiceImpl implements BusMngmtService {
     }
 
     @Override
-    public List<BusDto> findByPeopleAmount(int amount) {
+    public List<BusDto> findByPeopleAmount(Long amount) {
         List<BusEntity> busesEntities = busRepository.findByPeopleAmount(amount);
         List<BusDto> busesDto = new ArrayList<>();
         if (!busesEntities.isEmpty()) {

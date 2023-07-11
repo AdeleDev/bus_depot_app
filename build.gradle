@@ -76,6 +76,7 @@ dependencies {
     implementation "org.springframework.boot:spring-boot-starter-data-jpa:$springBootVersion"
     implementation "org.mapstruct:mapstruct:${mapStructVersion}"
     annotationProcessor "org.mapstruct:mapstruct-processor:${mapStructVersion}"
+    implementation "com.h2database:h2"
 
 }
 

@@ -72,6 +72,11 @@ dependencies {
     implementation "org.springframework.boot:spring-boot-starter-test"
     implementation "io.swagger.core.v3:swagger-annotations:$swaggerVersion"
     implementation "org.openapitools:jackson-databind-nullable:$jacksonNullableVersion"
+    implementation "org.hibernate.validator:hibernate-validator:${hibernateVersion}"
+    implementation "org.springframework.boot:spring-boot-starter-data-jpa:$springBootVersion"
+    implementation "org.mapstruct:mapstruct:${mapStructVersion}"
+    annotationProcessor "org.mapstruct:mapstruct-processor:${mapStructVersion}"
+
 }
 
 test {

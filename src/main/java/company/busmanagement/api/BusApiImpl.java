@@ -27,7 +27,7 @@ import java.util.List;
  */
 @Component
 @RequestMapping("/v1")
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "${client.address}")
 public class BusApiImpl implements BusesApi {
     private BusMngmtService service;
 

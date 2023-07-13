@@ -8,6 +8,6 @@ EXPOSE 8080
 
 RUN mkdir /app
 
-COPY --from=build /home/gradle/src/build/libs/bus_depot_app.jar /app/spring-boot-application.jar
+COPY --from=build /home/gradle/src/build/libs/src.jar /app/spring-boot-application.jar
 
 ENTRYPOINT ["java","-jar","/app/spring-boot-application.jar"]

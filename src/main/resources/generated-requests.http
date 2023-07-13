@@ -6,13 +6,9 @@ Content-Type: application/json
   "number": "as232",
   "color": "green",
   "peopleAmount": 4,
-  "maintenanceDate": "2012-01-01"
+  "maintenanceDate": "2012-01-01",
+  "trip": "trip"
 }
-
-###
-GET http://localhost:8080/v1/buses
-
-
 
 ###
 POST http://localhost:8080/v1/buses
@@ -22,5 +18,10 @@ Content-Type: application/json
   "number": "er2123",
   "color": "black",
   "peopleAmount": 10,
-  "maintenanceDate": "2014-01-01"
+  "maintenanceDate": "2014-01-01",
+  "trip": "trip"
 }
+
+###
+GET http://localhost:8080/v1/buses
+

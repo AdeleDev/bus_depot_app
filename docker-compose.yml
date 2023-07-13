@@ -2,28 +2,15 @@ version: '2'
 services:
   backend:
     container_name: backend-server
-    build:
-      context: .
-      dockerfile: Dockerfile
-    image: backend-server:latest
+    image: bus-deport-backend:latest
     ports:
       - "8080:8080"
-    networks:
-      - spring-network
     volumes:
       - db:/data
-#  frontend:
-#    container_name: frontend-server
-#    build:
-#      context: frontend-server
-#      dockerfile: Dockerfile
-#    image: frontend-server:latest
-#    ports:
-#      - "80:80"
-#    networks:
-#      - spring-network
-networks:
-  spring-network:
-    driver: bridge
+  frontend:
+    container_name: frontend-server
+    image: bus-deport-frontend:latest
+    ports:
+      - "3000:80"
 volumes:
   db:

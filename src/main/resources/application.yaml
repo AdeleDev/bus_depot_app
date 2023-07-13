@@ -18,3 +18,5 @@ spring:
 logging:
   level:
     root: INFO
+client:
+  address: "http://localhost:3000"

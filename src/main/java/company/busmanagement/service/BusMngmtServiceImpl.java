@@ -61,7 +61,7 @@ public class BusMngmtServiceImpl implements BusMngmtService {
             throw new BusNotExistException();
         }
         List<BusEntity> busesEntities = busRepository.findByNumber(bus.getNumber());
-        if (!busesEntities.isEmpty()) {
+        if (!busesEntities.isEmpty() && !busesEntities.get(0).getId().equals(bus.getId())) {
             throw new BusAlreadyExistException(bus.getNumber());
         }
         if (bus.getMaintenanceDate().getYear() < 2010) {

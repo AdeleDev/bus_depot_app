@@ -52,17 +52,17 @@ gradle bootRun
 ### Via Docker
  Switch in terminal to folder where Dockerfile 
 ```sh
-docker build . -t backend-server  
+docker build . -t bus-depot-backend  
 ```
 
 Start without frontend:
 ```sh
-docker run -d -p 8080:8080 --name backend-server bus-deport-backend
+docker run -d -p 8080:8080 --name backend-server bus-depot-backend
 ```
 
 Start with frontend: set right path in docker compose for both images firstly
 ```sh
- docker-compose up -d
+ docker-compose up 
  ```
 
 #### API request :

@@ -7,7 +7,10 @@ Content-Type: application/json
   "color": "green",
   "peopleAmount": 4,
   "maintenanceDate": "2012-01-01",
-  "trip": "trip"
+  "trip": "trip",
+  "driversInfo": [
+    {"id": 1, "href": "/drivers/1"},{"id": 2, "href": "/drivers/2"}
+  ]
 }
 
 ###

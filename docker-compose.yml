@@ -1,0 +1,29 @@
+version: '2'
+services:
+  backend:
+    container_name: backend-server
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: backend-server:latest
+    ports:
+      - "8080:8080"
+    networks:
+      - spring-network
+    volumes:
+      - db:/data
+#  frontend:
+#    container_name: frontend-server
+#    build:
+#      context: frontend-server
+#      dockerfile: Dockerfile
+#    image: frontend-server:latest
+#    ports:
+#      - "80:80"
+#    networks:
+#      - spring-network
+networks:
+  spring-network:
+    driver: bridge
+volumes:
+  db:

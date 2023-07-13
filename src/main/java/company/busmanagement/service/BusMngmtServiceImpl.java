@@ -32,7 +32,7 @@ public class BusMngmtServiceImpl implements BusMngmtService {
 
     @Override
     public BusDto addBus(BusDto bus) throws BusAlreadyExistException {
-        LOGGER.info("Got create request for bus with registration number" + bus.getNumber());
+        LOGGER.info("Got create request for bus with registration number = " + bus.getNumber());
 
         List<BusEntity> busesEntities = busRepository.findByNumber(bus.getNumber());
         if (bus.getMaintenanceDate().getYear() < 2010) {

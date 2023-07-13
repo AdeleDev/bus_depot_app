@@ -8,6 +8,5 @@ import java.util.List;
 
 @Repository
 public interface BusRepository extends JpaRepository<BusEntity, Long> {
-
     List<BusEntity> findByNumber(String number);
 }

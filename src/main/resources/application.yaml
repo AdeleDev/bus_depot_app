@@ -2,7 +2,7 @@ spring:
   application:
     name: bus-management
   datasource:
-    url: jdbc:h2:file:/testdb
+    url: jdbc:h2:file:./testdb
     username: sa
     password:
     driver-class-name: org.h2.Driver
@@ -13,6 +13,8 @@ spring:
         implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyJpaCompliantImpl
         physical-strategy: org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
     database-platform: org.hibernate.dialect.H2Dialect
+  h2:
+    console.enabled: true
 logging:
   level:
     root: INFO

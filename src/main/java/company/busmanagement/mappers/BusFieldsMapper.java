@@ -27,16 +27,7 @@ public interface BusFieldsMapper {
     @InheritInverseConfiguration
     BusDto entityToDto(BusEntity bus);
 
-
-    //)"
-    //@IterableMapping(elementMappingControl = Long.class)
     @Mapping(target = "id", expression = "java(value)")
     @Mapping(target = "href", expression = "java(\"/drivers/\" + value)")
     DriverDto map(Long value);
-
-
-//
-//    default Set<DriverDto> driversListToSet(List<DriverDto> driverList) {
-//        return new HashSet<>(driverList);
-//    }
 }

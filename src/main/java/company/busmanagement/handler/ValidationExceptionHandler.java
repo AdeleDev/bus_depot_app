@@ -12,7 +12,6 @@ import javax.validation.ValidationException;
 @Component
 public class ValidationExceptionHandler {
     private final static Logger logger = LoggerFactory.getLogger(ValidationExceptionHandler.class);
-
     private final static String RESPONSE_MESSAGE = "Validation exception - ";
 
     @ExceptionHandler(value = ValidationException.class)

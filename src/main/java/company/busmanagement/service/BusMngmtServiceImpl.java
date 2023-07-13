@@ -27,7 +27,6 @@ public class BusMngmtServiceImpl implements BusMngmtService {
 
     @Autowired
     private BusRepository busRepository;
-
     private static final String INVALID_YEAR_MESSAGE = "Years before 2010 are not supported";
 
 
@@ -48,14 +47,14 @@ public class BusMngmtServiceImpl implements BusMngmtService {
         busEntity = busRepository.save(busEntity);
         bus = BUS_FIELDS_MAPPER.entityToDto(busEntity);
 
-        LOGGER.info("Bus with registration number " + bus.getNumber() + " was created");
+        LOGGER.info("Bus with registration number = " + bus.getNumber() + " was created");
 
         return bus;
     }
 
     @Override
     public BusDto updateBus(BusDto bus) throws BusNotExistException {
-        LOGGER.info("Got update request for bus with registration number" + bus.getNumber());
+        LOGGER.info("Got update request for bus with registration number = " + bus.getNumber());
         Long busId = bus.getId();
 
         if (busRepository.findById(busId).isEmpty()) {
@@ -69,7 +68,7 @@ public class BusMngmtServiceImpl implements BusMngmtService {
         busEntity = busRepository.save(busEntity);
         bus = BUS_FIELDS_MAPPER.entityToDto(busEntity);
 
-        LOGGER.info("Bus with id  = " + busId + " and registration number" + bus.getNumber() + " was updated");
+        LOGGER.info("Bus with id  = " + busId + " and registration number= " + bus.getNumber() + " was updated");
 
         return bus;
     }
@@ -83,7 +82,7 @@ public class BusMngmtServiceImpl implements BusMngmtService {
         BusEntity busEntity = busRepository.findById(busId).get();
         busRepository.delete(busEntity);
 
-        LOGGER.info("Bus with id  = " + busId + " and registration number" + busEntity.getNumber() + " was deleted");
+        LOGGER.info("Bus with id  = " + busId + " and registration number = " + busEntity.getNumber() + " was deleted");
     }
 
     @Override

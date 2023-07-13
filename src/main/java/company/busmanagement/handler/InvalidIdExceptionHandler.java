@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 @Component
 public class InvalidIdExceptionHandler {
     private final static Logger LOGGER = LoggerFactory.getLogger(InvalidIdExceptionHandler.class);
+
     @ExceptionHandler(value = InvalidIdException.class)
     public ResponseEntity<Object> toResponse(InvalidIdException exception) {
         LOGGER.error(exception.getMessage());

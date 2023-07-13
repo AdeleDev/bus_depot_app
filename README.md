@@ -62,7 +62,7 @@ docker run -d -p 8080:8080 --name backend-server bus-depot-backend
 
 Start with frontend: set right path in docker compose for both images firstly
 ```sh
- docker-compose up 
+ docker-compose up -d
  ```
 
 #### API request :

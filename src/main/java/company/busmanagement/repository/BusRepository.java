@@ -10,11 +10,4 @@ import java.util.List;
 public interface BusRepository extends JpaRepository<BusEntity, Long> {
 
     List<BusEntity> findByNumber(String number);
-
-    List<BusEntity> findByPeopleAmount(long amount);
-
-    List<BusEntity> findByTripContains(String location);
-
-
-
 }

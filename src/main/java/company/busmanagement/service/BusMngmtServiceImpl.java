@@ -9,6 +9,7 @@ import company.busmanagement.repository.BusRepository;
 import company.busmanagement.service.api.BusMngmtService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.transaction.Transactional;
@@ -24,6 +25,7 @@ import static company.busmanagement.mappers.BusFieldsMapper.BUS_FIELDS_MAPPER;
 public class BusMngmtServiceImpl implements BusMngmtService {
     private final static Logger LOGGER = LoggerFactory.getLogger(BusMngmtService.class);
 
+    @Autowired
     private BusRepository busRepository;
 
     private static final String INVALID_YEAR_MESSAGE = "Years before 2010 are not supported";

@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
@@ -24,6 +25,7 @@ import java.util.List;
  * <p>This is a sample API of Bus management service.
  */
 @Component
+@RequestMapping("/v1")
 public class BusApiImpl implements BusesApi {
     private BusMngmtService service;
 

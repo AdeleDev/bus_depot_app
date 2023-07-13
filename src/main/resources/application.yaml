@@ -2,7 +2,7 @@ spring:
   application:
     name: bus-management
   datasource:
-    url: jdbc:h2:mem:testdb
+    url: jdbc:h2:file:/testdb
     username: sa
     password:
     driver-class-name: org.h2.Driver

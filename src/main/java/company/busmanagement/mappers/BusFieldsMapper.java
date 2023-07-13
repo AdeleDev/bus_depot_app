@@ -21,7 +21,7 @@ public interface BusFieldsMapper {
     @Mapping(source = "trip", target = "trip")
     @Mapping(target = "createdTimestamp", ignore = true)
     @Mapping(target = "lastModifiedTimestamp", ignore = true)
-    @Mapping(target = "driversInfo", expression = "java(busDto.getDriversInfo().stream().map(DriverDto::getId).toList())")
+    @Mapping(target = "driversInfo", expression = "java(busDto.getDriversInfo() != null ? busDto.getDriversInfo().stream().map(DriverDto::getId).toList() : null)")
     BusEntity dtoToEntity(BusDto busDto);
 
     @InheritInverseConfiguration

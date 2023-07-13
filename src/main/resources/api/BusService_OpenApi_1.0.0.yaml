@@ -194,7 +194,7 @@ components:
         maintenanceDate:
           description: Date of last maintenance. Validation rule - our system doesn't support years before 2010
           type: string
-          example: 10.02.2022
+          example: 2022-02-10
           format: date
         trip:
           description: Trip that bus follows

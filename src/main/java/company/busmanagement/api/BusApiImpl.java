@@ -6,6 +6,7 @@ import company.busmanagement.busservice.model.BusDto;
 import company.busmanagement.busservice.model.UpdateBus200ResponseDto;
 import company.busmanagement.exception.BusAlreadyExistException;
 import company.busmanagement.exception.BusNotExistException;
+import company.busmanagement.exception.InvalidIdException;
 import company.busmanagement.service.BusMngmtServiceImpl;
 import company.busmanagement.service.api.BusMngmtService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +16,6 @@ import org.springframework.stereotype.Component;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import java.util.List;
 
 /**
@@ -67,32 +67,25 @@ public class BusApiImpl implements BusesApi {
     }
 
     @Override
-    public ResponseEntity<List<BusDto>> findByPeopleAmount(@NotNull Long amount) {
+    public ResponseEntity<List<BusDto>> getAllBuses() {
         try {
-            List<BusDto> buses = service.findByPeopleAmount(amount);
-            if(!buses.isEmpty()) {
-                return ResponseEntity.ok().body(buses);
-            }
-            else {
-                return ResponseEntity.noContent().build();
-            }
-        } catch (IllegalArgumentException e) {
+            List<BusDto> buses = service.getAll();
+            return ResponseEntity.status(HttpStatus.OK).body(buses);
+        } catch (BusNotExistException e) {
             e.printStackTrace();
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
         }
     }
 
     @Override
-    public ResponseEntity<List<BusDto>> findByTrip(@NotNull @Size(min = 1) String location) {
+    public ResponseEntity<BusDto> getBusById(Long busId) {
         try {
-            List<BusDto> buses = service.findByTrip(location);
-            if(!buses.isEmpty()) {
-                return ResponseEntity.ok(buses);
-            }
-            else {
-                return ResponseEntity.noContent().build();
-            }
-        } catch (IllegalArgumentException e) {
+            BusDto bus = service.getBusById(busId);
+            return ResponseEntity.status(HttpStatus.OK).body(bus);
+        } catch (BusNotExistException e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        } catch (InvalidIdException e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }

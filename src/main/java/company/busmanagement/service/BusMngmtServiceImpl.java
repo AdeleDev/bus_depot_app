@@ -15,11 +15,9 @@ import javax.transaction.Transactional;
 import javax.validation.ValidationException;
 import java.time.OffsetDateTime;
 import java.time.ZoneId;
-import java.util.ArrayList;
 import java.util.List;
 
 import static company.busmanagement.mappers.BusFieldsMapper.BUS_FIELDS_MAPPER;
-
 
 @Component
 @Transactional
@@ -84,12 +82,11 @@ public class BusMngmtServiceImpl implements BusMngmtService {
         busRepository.delete(busEntity);
 
         LOGGER.info("Bus with id  = " + busId + " and registration number" + busEntity.getNumber() + " was deleted");
-
     }
 
     @Override
     public BusDto getBusById(Long busId) throws BusNotExistException, InvalidIdException {
-        LOGGER.info("Got get request for bus for bus with id = " + busId);
+        LOGGER.info("Got get request for bus with id = " + busId);
 
         if (busId <= 0) {
             throw new InvalidIdException();
@@ -103,37 +100,14 @@ public class BusMngmtServiceImpl implements BusMngmtService {
     }
 
     @Override
-    public List<BusDto> findByPeopleAmount(Long amount) {
-        List<BusEntity> busesEntities = busRepository.findByPeopleAmount(amount);
-        List<BusDto> busesDto = new ArrayList<>();
-        if (!busesEntities.isEmpty()) {
-            LOGGER.info("Found " + busesEntities.size() + " buses with amount of passengers = " + amount);
-            for (BusEntity bus : busesEntities) {
-                LOGGER.debug("Bus with id = " + bus.getId() + " and number = " + bus.getNumber());
-                busesDto.add(BUS_FIELDS_MAPPER.entityToDto(bus));
-            }
-        } else {
-            LOGGER.info("No buses were found by set amount of passengers");
+    public List<BusDto> getAll() throws BusNotExistException {
+        LOGGER.info("Got get request for all buses");
+
+        List<BusEntity> busEntities = busRepository.findAll();
+        if (busEntities.isEmpty()) {
+            throw new BusNotExistException();
         }
-        return busesDto;
+
+        return busEntities.stream().map(BUS_FIELDS_MAPPER::entityToDto).toList();
     }
-
-
-    @Override
-    public List<BusDto> findByTrip(String location) {
-        List<BusEntity> busesEntities = busRepository.findByTripContains(location);
-        List<BusDto> busesDto = new ArrayList<>();
-        if (!busesEntities.isEmpty()) {
-            LOGGER.info("Found " + busesEntities.size() + " buses that passes location = " + location);
-            for (BusEntity bus : busesEntities) {
-                LOGGER.debug("Bus with id = " + bus.getId() + " and number = " + bus.getNumber());
-                busesDto.add(BUS_FIELDS_MAPPER.entityToDto(bus));
-            }
-        } else {
-            LOGGER.info("No buses were found to follow chosen location");
-        }
-        return busesDto;
-    }
-
-
 }

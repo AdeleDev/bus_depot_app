@@ -35,7 +35,7 @@ public class BusMngmtServiceImpl implements BusMngmtService {
         LOGGER.info("Got create request for bus with registration number" + bus.getNumber());
 
         List<BusEntity> busesEntities = busRepository.findByNumber(bus.getNumber());
-        if (bus.getMaintenanceDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate().getYear() < 2010) {
+        if (bus.getMaintenanceDate().getYear() < 2010) {
             throw new ValidationException(INVALID_YEAR_MESSAGE);
         }
         if (!busesEntities.isEmpty()) {
@@ -53,14 +53,18 @@ public class BusMngmtServiceImpl implements BusMngmtService {
     }
 
     @Override
-    public BusDto updateBus(BusDto bus) throws BusNotExistException {
+    public BusDto updateBus(BusDto bus) throws BusNotExistException, BusAlreadyExistException {
         LOGGER.info("Got update request for bus with registration number = " + bus.getNumber());
         Long busId = bus.getId();
 
         if (busRepository.findById(busId).isEmpty()) {
             throw new BusNotExistException();
         }
-        if (bus.getMaintenanceDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate().getYear() < 2010) {
+        List<BusEntity> busesEntities = busRepository.findByNumber(bus.getNumber());
+        if (!busesEntities.isEmpty()) {
+            throw new BusAlreadyExistException(bus.getNumber());
+        }
+        if (bus.getMaintenanceDate().getYear() < 2010) {
             throw new ValidationException(INVALID_YEAR_MESSAGE);
         }
         BusEntity busEntity = BUS_FIELDS_MAPPER.dtoToEntity(bus);

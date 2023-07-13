@@ -87,9 +87,8 @@ openApiGenerate{
     generatorName = "spring"
     inputSpec = "$rootDir/src/main/resources/api/BusService_OpenApi_1.0.0.yaml"
     outputDir = "$buildDir/openapi-generated-src"
-
     configOptions = [
-            dateLibrary   : "java17",
+            dateLibrary   : "java8",
             sourceFolder  : "",
             returnResponse: "true",
             interfaceOnly : "true"

@@ -43,7 +43,7 @@ public class BusApiImpl implements BusesApi {
             return ResponseEntity.status(HttpStatus.CREATED).build();
         } catch (BusAlreadyExistException e) {
             e.printStackTrace();
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+            return ResponseEntity.status(HttpStatus.METHOD_NOT_ALLOWED).build();
         }
 
     }
@@ -56,6 +56,8 @@ public class BusApiImpl implements BusesApi {
         } catch (BusNotExistException e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        } catch (BusAlreadyExistException e) {
+            return ResponseEntity.status(HttpStatus.METHOD_NOT_ALLOWED).build();
         }
     }
 

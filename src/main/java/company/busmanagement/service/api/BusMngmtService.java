@@ -16,7 +16,7 @@ public interface BusMngmtService {
 
     BusDto addBus(BusDto bus) throws BusAlreadyExistException;
 
-    BusDto updateBus(BusDto bus) throws BusNotExistException;
+    BusDto updateBus(BusDto bus) throws BusNotExistException, BusAlreadyExistException;
 
     void deleteBus(Long busId) throws BusNotExistException;
 

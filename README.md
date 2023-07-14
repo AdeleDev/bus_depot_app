@@ -18,6 +18,11 @@ Working in pair with [Frontend React App](https://github.com/AdeleDev/bus_depot_
 git clone https://github.com/AdeleDev/bus_depot_app.git
 ```
 
+#### To have a look on API:
+
+```
+https://github.com/AdeleDev/bus_depot_app/blob/master/src/main/resources/api/BusService_OpenApi_1.0.0.yaml
+```
 #### Build project:
 
 ```sh

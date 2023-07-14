@@ -157,6 +157,7 @@ components:
         - color
         - peopleAmount
         - maintenanceDate
+        - trip
       type: object
       properties:
         id:
